@@ -1,4 +1,4 @@
-package com.supportInformatica.loja.controller;
+package com.supportInformatica.loja.controllers;
 
 import com.supportInformatica.loja.entities.User;
 import org.springframework.http.ResponseEntity;
