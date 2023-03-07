@@ -1,8 +1,10 @@
 package com.supportInformatica.loja.config;
 
+import com.supportInformatica.loja.entities.Category;
 import com.supportInformatica.loja.entities.Order;
 import com.supportInformatica.loja.entities.User;
 import com.supportInformatica.loja.entities.enums.OrderStatus;
+import com.supportInformatica.loja.repositories.CategoryRepository;
 import com.supportInformatica.loja.repositories.OrderRepository;
 import com.supportInformatica.loja.repositories.UserRepository;
 import org.aspectj.weaver.ast.Or;
@@ -23,8 +25,18 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception{
+
+        Category category1 = new Category(null, "Electronics");
+        Category category2 = new Category(null, "Books");
+        Category category3 = new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+
         User user1 = new User(null, "Maria Rangel", "maria@gmail.com", "1234889", "123456");
         User user2 = new User(null, "Gustavo Soares", "gustavo@gmail.com", "98765432", "123456");
 
