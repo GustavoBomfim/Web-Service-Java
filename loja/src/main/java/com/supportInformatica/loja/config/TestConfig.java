@@ -2,10 +2,12 @@ package com.supportInformatica.loja.config;
 
 import com.supportInformatica.loja.entities.Category;
 import com.supportInformatica.loja.entities.Order;
+import com.supportInformatica.loja.entities.Product;
 import com.supportInformatica.loja.entities.User;
 import com.supportInformatica.loja.entities.enums.OrderStatus;
 import com.supportInformatica.loja.repositories.CategoryRepository;
 import com.supportInformatica.loja.repositories.OrderRepository;
+import com.supportInformatica.loja.repositories.ProductRepository;
 import com.supportInformatica.loja.repositories.UserRepository;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void run(String... args) throws Exception{
 
@@ -35,7 +40,11 @@ public class TestConfig implements CommandLineRunner {
         Category category2 = new Category(null, "Books");
         Category category3 = new Category(null, "Computers");
 
-        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+        Product product1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Product product2 = new Product(null, "Smart TV", "Nulla eu imperdiet maximus tortor, at mollis.", 2190.0, "");
+        Product product3 = new Product(null, "Macbook pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Product product4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Product product5 = new Product(null, "Rails for dummies", "Cras fringilla convallis sem vel faucibus", 100.99, "");
 
         User user1 = new User(null, "Maria Rangel", "maria@gmail.com", "1234889", "123456");
         User user2 = new User(null, "Gustavo Soares", "gustavo@gmail.com", "98765432", "123456");
@@ -44,6 +53,8 @@ public class TestConfig implements CommandLineRunner {
         Order order2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, user2);
         Order order3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, user1);
 
+        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+        productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
 
