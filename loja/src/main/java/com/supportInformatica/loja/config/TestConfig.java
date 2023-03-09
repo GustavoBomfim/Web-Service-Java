@@ -1,14 +1,8 @@
 package com.supportInformatica.loja.config;
 
-import com.supportInformatica.loja.entities.Category;
-import com.supportInformatica.loja.entities.Order;
-import com.supportInformatica.loja.entities.Product;
-import com.supportInformatica.loja.entities.User;
+import com.supportInformatica.loja.entities.*;
 import com.supportInformatica.loja.entities.enums.OrderStatus;
-import com.supportInformatica.loja.repositories.CategoryRepository;
-import com.supportInformatica.loja.repositories.OrderRepository;
-import com.supportInformatica.loja.repositories.ProductRepository;
-import com.supportInformatica.loja.repositories.UserRepository;
+import com.supportInformatica.loja.repositories.*;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception{
@@ -67,6 +64,14 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+
+        OrderItem orderItem1 = new OrderItem(order1, product1, 2, product1.getPrice());
+        OrderItem orderItem2 = new OrderItem(order1, product3,1, product3.getPrice());
+        OrderItem orderItem3 = new OrderItem(order2, product3,2, product3.getPrice());
+        OrderItem orderItem4 = new OrderItem(order3, product5,2, product5.getPrice());
+
+
+        orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
 
     }
 }
